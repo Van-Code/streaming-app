@@ -3,6 +3,9 @@ Ability to edit user info and update movie data.
 
 https://van-code.github.io/react-usersDir/
 
+![](screenshot1.png)
+![](screenshot2.png)
+
 
 ## Available Scripts
 
