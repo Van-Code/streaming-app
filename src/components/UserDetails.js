@@ -48,7 +48,7 @@ class UserDetails extends React.Component {
         const that = this;
         let movie = this.state.movie !== "" ? this.state.movie : this.state.user.movie;
         movie = encodeURI(movie);
-        let url = `http://www.omdbapi.com/?t=${movie}&apikey=219a8559`
+        let url = `https://www.omdbapi.com/?t=${movie}&apikey=219a8559`
         fetch(url)
             .then(function (resp) {
                 return resp.json()
