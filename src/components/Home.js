@@ -14,7 +14,13 @@ class Home extends React.Component {
     }
     componentDidMount() {
         const that = this;
-        fetch('https://van-code.github.io/react-usersDir/json/MOCK_DATA.json')
+        let url = 'https://van-code.github.io/react-usersDir/json/MOCK_DATA.json';
+        console.log(window.location.hostname, 'localhost')
+        if (window.location.hostname === 'localhost') {
+            url = 'react-usersDir/json/MOCK_DATA.json'
+        }
+        console.log(url)
+        fetch(url)
             .then(function (users) {
                 return users.json()
             }).then(function (resp) {
