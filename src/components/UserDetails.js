@@ -111,7 +111,7 @@ class UserDetails extends React.Component {
         if (typeof (film) === 'object') {
             let image = film.Poster !== 'N/A' ? film.Poster : 'https://via.placeholder.com/150';
             element = <Col md={6}>
-                <img src={image} alt={film.Title} width="150px" class="text-center"></img>
+                <img src={image} alt={film.Title} width="150px" className="text-center"></img>
                 <p><strong>{film.Title}</strong></p>
                 <p>{film.Rated} - {film.Runtime} - {film.Released}</p>
                 <p>{film.Plot}</p>
