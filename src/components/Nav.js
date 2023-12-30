@@ -1,20 +1,12 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-class Nav extends React.Component {
-
-    render() {
-        return (
-            <Navbar >
-                <Navbar.Brand>User Directory</Navbar.Brand>
-                <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
-                        Signed in as: Admin
-                    </Navbar.Text>
-                </Navbar.Collapse>
-
-            </Navbar >
-        );
-    }
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+export default function Nav(props) {
+  return (
+    <Navbar variant="dark">
+      <Navbar.Brand>Flcks</Navbar.Brand>
+      <Navbar.Collapse className="justify-content-end">
+        <Navbar.Text>{props.user && `Welcome: ${props.user.name}`}</Navbar.Text>
+      </Navbar.Collapse>
+    </Navbar>
+  );
 }
-
-export default Nav;

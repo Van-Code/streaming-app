@@ -1,68 +1,49 @@
-import React from 'react';
-import Users from './Users';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import UserDetails from './UserDetails';
+import React, { useState, useEffect } from "react";
+import List from "./List";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { options } from "../api.js";
 
-class Home extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: []
-        };
-    }
-    componentDidMount() {
-        const that = this;
-        let url = 'https://van-code.github.io/react-usersDir/json/MOCK_DATA.json';
-        console.log(window.location.hostname, 'localhost')
-        if (window.location.hostname === 'localhost') {
-            url = 'react-usersDir/json/MOCK_DATA.json'
-        }
-        console.log(url)
-        fetch(url)
-            .then(function (users) {
-                return users.json()
-            }).then(function (resp) {
-                const data = resp;
-                that.setState({ users: data });
-            }).catch(function (err) {
-                console.log('err', err)
-            })
-    }
-    renderUsers() {
-        if (this.state.users.length > 0) {
-            return (
-                <Users users={this.state.users} >
-                </Users >
-            )
-        } else {
-            return (
-                <Col md={12}>No users found.</Col>
-            )
-        }
-    }
-    renderModal = (user) => {
-        if (this.state.show) {
-            return (<UserDetails user={user} show={this.state.show}
-                handleChange={this.handleChange} handleHide={this.handleHide}></UserDetails>)
-        }
-    }
-    render() {
-        return (
-            <Container>
-                <Row>
-                    <Col md={12} class="text-left">
-                        <strong>{this.state.users.length}</strong> user(s)
+export default function Home() {
+  const [movies, setMovies] = useState([]);
 
-                    </Col>
-                    <Col md={12}>
-                        {this.renderUsers()}
-                    </Col>
-                </Row>
-            </Container>
-        )
+  useEffect(() => {
+    fetch("https://api.themoviedb.org/3/authentication", options)
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.success) {
+          fetchData();
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  function fetchData() {
+    fetch(
+      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setMovies(response.results))
+      .catch((err) => console.error(err));
+  }
+
+  function renderThumbnails() {
+    if (movies) {
+      return <List movies={movies} />;
+    } else {
+      return <Col md={12}>No movies found.</Col>;
     }
+  }
+  return (
+    <Container>
+      <Row>
+        <Col md={12}>
+          <h2>Popular Movies</h2>
+          <Row>{renderThumbnails()}</Row>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
-
-export default Home;

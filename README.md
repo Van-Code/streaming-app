@@ -1,11 +1,15 @@
-Get list of users and their favorite movie title. Get the movie data from omdb API and display poster, plot, etc.
-Ability to edit user info and update movie data.
+React Movie Player App
+
+A Screen to select profile and create a new user.<br>
+Displays list and details of popular movies from TMDB.<br>
+View movie summary.<br>
+Watch movie<br>
 
 https://van-code.github.io/react-usersDir/
 
-![](screenshot1.png)
-![](screenshot2.png)
-
+![](./public/profile.png)
+![](./public/list.png)
+![](./public/watch.png)
 
 ## Available Scripts
 

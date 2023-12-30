@@ -1,28 +1,38 @@
-import React from 'react';
-import Nav from './components/Nav';
-import Home from './components/Home';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import Nav from "./components/Nav";
+import Home from "./components/Home";
+import Watch from "./components/Watch";
+import Details from "./components/Details";
+import SelectProfile from "./components/SelectProfile";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
-class App extends React.Component {
+export default function App() {
+  const [user, setUser] = useState();
+  const location = useLocation();
+  const previousLocation = location.state?.previousLocation;
+  const movie = location.state?.movie;
 
-  render() {
-    return (
-      <Router className="App">
-        <Nav />
-        <Switch>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    );
-  }
+  return (
+    <>
+      <Nav user={user} />
+      <Routes location={previousLocation || location}>
+        <Route path="/watch/:id" element={<Watch />} />
+        {user && <Route path="/" element={<Home />}></Route>}
+        {!user && (
+          <Route
+            path="/"
+            element={<SelectProfile setProfile={setUser} />}
+          ></Route>
+        )}
+      </Routes>
+      {previousLocation && (
+        <Routes>
+          <Route path="/modal" element={<Details movie={movie} />}></Route>
+        </Routes>
+      )}
+    </>
+  );
 }
-
-export default App;
