@@ -1,0 +1,47 @@
+:root {
+    --colors: red, blue, green, purple;
+}
+.profiles-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+}
+.profiles-list {
+    padding:0;
+    margin: 0 auto;
+    text-align: center;
+    list-style: none;
+    display: inline-flex;
+}
+.profile-icon{
+    width:150px;
+    height:150px;
+    border-radius:10px;
+    background-color:#cecece;
+    border:none;
+    margin:15px;
+}
+.profile:nth-of-type(1) button{
+    background:orange;
+}
+.profile:nth-of-type(2) button{
+    background:green;
+}
+.add-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 150px;
+    align-items: center;
+}
+.add-icon button{
+    font-size: 50px;
+    color: #000;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    line-height: 1;
+    font-weight: 600;
+}
