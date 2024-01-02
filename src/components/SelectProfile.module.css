@@ -1,21 +1,21 @@
 :root {
     --colors: red, blue, green, purple;
 }
-.profiles-container{
+.container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
     text-align: center;
 }
-.profiles-list {
+.list {
     padding:0;
     margin: 0 auto;
     text-align: center;
     list-style: none;
     display: inline-flex;
 }
-.profile-icon{
+.icon{
     width:150px;
     height:150px;
     border-radius:10px;
@@ -29,14 +29,14 @@
 .profile:nth-of-type(2) button{
     background:green;
 }
-.add-icon {
+.addIcon {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 150px;
     align-items: center;
 }
-.add-icon button{
+.addIcon button{
     font-size: 50px;
     color: #000;
     border-radius: 100px;

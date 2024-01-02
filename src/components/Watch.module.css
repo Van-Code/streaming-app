@@ -21,18 +21,10 @@
   border:none;
 }
 
-
 .video-container:hover .backButton{
   visibility: visible;
 }
-iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 100vh;
-    transform: translate(-50%, -50%);
-}
+
 .back-arrow{
   transform:scale(3);
   margin-top:-2rem;

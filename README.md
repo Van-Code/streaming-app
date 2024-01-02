@@ -5,7 +5,7 @@ Displays list and details of popular movies from TMDB.<br>
 View movie summary.<br>
 Watch movie<br>
 
-https://van-code.github.io/react-usersDir/
+https://van-code.github.io/streaming-app/
 
 ![](./public/profile.png)
 ![](./public/list.png)
