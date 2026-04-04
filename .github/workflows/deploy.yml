@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+# Allows the GITHUB_TOKEN to push to the gh-pages branch
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Add REACT_APP_TMDB_TOKEN as a repository secret in
+          # Settings → Secrets and variables → Actions.
+          REACT_APP_TMDB_TOKEN: ${{ secrets.REACT_APP_TMDB_TOKEN }}
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          # Ensures the React app handles its own routing under the /streaming-app/ base path.
+          # If you switch to HashRouter, remove this line.
+          destination_dir: .
