@@ -1,47 +1,90 @@
-:root {
-    --colors: red, blue, green, purple;
+.select-profile {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-5);
+  background: var(--bg-base);
 }
-.profiles-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    text-align: center;
+
+.select-profile__logo {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-7);
+  user-select: none;
 }
+
+.select-profile__heading {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-7);
+  letter-spacing: 0.01em;
+}
+
+/* ─── Profile list ─── */
 .profiles-list {
-    padding:0;
-    margin: 0 auto;
-    text-align: center;
-    list-style: none;
-    display: inline-flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  justify-content: center;
 }
-.profile-icon{
-    width:150px;
-    height:150px;
-    border-radius:10px;
-    background-color:#cecece;
-    border:none;
-    margin:15px;
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
 }
-.profile:nth-of-type(1) button{
-    background:orange;
+
+/* ─── Profile button ─── */
+.profile-btn {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-lg);
+  border: 2px solid transparent;
+  color: #fff;
+  font-size: 2.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
-.profile:nth-of-type(2) button{
-    background:green;
+
+.profile-btn:hover,
+.profile-btn:focus-visible {
+  border-color: var(--text-primary);
+  transform: scale(1.06);
+  box-shadow: var(--shadow-hover);
+  outline: none;
 }
-.add-icon {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 150px;
-    align-items: center;
+
+.profile-btn--add {
+  background: transparent !important;
+  border: 2px dashed var(--border-muted);
+  color: var(--text-muted);
+  font-size: 2.5rem;
+  font-weight: 300;
 }
-.add-icon button{
-    font-size: 50px;
-    color: #000;
-    border-radius: 100px;
-    width: 50px;
-    height: 50px;
-    line-height: 1;
-    font-weight: 600;
+
+.profile-btn--add:hover,
+.profile-btn--add:focus-visible {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+/* ─── Profile name ─── */
+.profile-name {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+  letter-spacing: 0.01em;
 }

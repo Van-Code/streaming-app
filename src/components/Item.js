@@ -1,38 +1,66 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
 import { getYear } from "../utils";
+import "./Item.css";
 
 export default function Item({ movie }) {
-  let timeout = null;
+  const timerRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  function onHover() {
-    timeout = setTimeout(() => {
+  const { title, poster_path, release_date } = movie;
+  const posterUrl = poster_path
+    ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+    : null;
+
+  function handleMouseEnter() {
+    timerRef.current = setTimeout(() => {
       navigate("/modal", {
         state: { previousLocation: location, movie },
       });
     }, 500);
   }
 
-  function resetTimer() {
-    window.clearTimeout(timeout);
+  function handleMouseLeave() {
+    clearTimeout(timerRef.current);
   }
 
-  const { title, poster_path, release_date } = movie;
-  const posterUrl = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  function handleClick() {
+    clearTimeout(timerRef.current);
+    navigate("/modal", {
+      state: { previousLocation: location, movie },
+    });
+  }
 
   return (
-    <Col xs={12} md={3} className="movie-card">
-      <Card onMouseOver={onHover} onMouseOut={resetTimer}>
-        <Card.Img variant="top" src={posterUrl} alt={title} />
-        <Card.Body>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>{release_date ? getYear(release_date) : null}</Card.Text>
-        </Card.Body>
-      </Card>
+    <Col>
+      <article
+        className="movie-card"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        aria-label={`${title}${release_date ? `, ${getYear(release_date)}` : ""}`}
+        onKeyDown={(e) => e.key === "Enter" && handleClick()}
+      >
+        {posterUrl ? (
+          <img
+            src={posterUrl}
+            alt={title}
+            className="movie-card__poster"
+          />
+        ) : (
+          <div className="movie-card__poster movie-card__poster--placeholder" />
+        )}
+        <div className="movie-card__overlay">
+          <p className="movie-card__title">{title}</p>
+          {release_date && (
+            <p className="movie-card__year">{getYear(release_date)}</p>
+          )}
+        </div>
+      </article>
     </Col>
   );
 }

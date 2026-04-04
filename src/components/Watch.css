@@ -1,50 +1,96 @@
-.video-container{
+.video-container {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 100;
+}
+
+/* ─── iframe ──────────────────────────────────────────────────────────── */
+.video-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100vw;
   height: 100vh;
-  position:relative;
-}
-.spinner{
-  position:absolute;
-  top:50%;
-  left:50%;
-}
-.backButton{
-  font-size:50px;
-  position:absolute;
-  top:0;
-  left:0;
-  visibility: hidden;
-  z-index:10;
-  color:#fff;
-  appearance: none;
-  background:transparent;
-  border:none;
+  transform: translate(-50%, -50%);
+  border: none;
 }
 
+@media (min-aspect-ratio: 16/9) {
+  .video-iframe {
+    height: 56.25vw;
+  }
+}
 
-.video-container:hover .backButton{
-  visibility: visible;
-}
-iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 100vh;
-    transform: translate(-50%, -50%);
-}
-.back-arrow{
-  transform:scale(3);
-  margin-top:-2rem;
-}
-  @media (min-aspect-ratio: 16/9) {
-    .video-container iframe {
-      height: 56.25vw;
-    }
+@media (max-aspect-ratio: 16/9) {
+  .video-iframe {
+    width: 177.78vh;
   }
-      
-  @media (max-aspect-ratio: 16/9) {
-    .video-container iframe {
-      width: 177.78vh;
-    }
-  }
+}
+
+/* ─── Back button ─────────────────────────────────────────────────────── */
+.back-btn {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-5);
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--t-base), background var(--t-fast);
+}
+
+.back-btn img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+}
+
+.video-container:hover .back-btn,
+.back-btn:focus-visible {
+  opacity: 1;
+}
+
+.back-btn:hover {
+  background: rgba(0, 0, 0, 0.88);
+}
+
+.back-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ─── Spinner ─────────────────────────────────────────────────────────── */
+.video-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-secondary);
+}
+
+/* ─── Error state ─────────────────────────────────────────────────────── */
+.video-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+  color: var(--text-secondary);
+  padding: var(--space-5);
+}
+
+.video-error p {
+  margin: 0;
+  font-size: 0.9375rem;
+}

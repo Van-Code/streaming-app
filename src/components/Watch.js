@@ -23,7 +23,7 @@ export default function Watch() {
     )
       .then((response) => response.json())
       .then((response) => {
-        const first = response.results?.[0];
+        const first = response.results?.find((v) => v.type === "Trailer") ?? response.results?.[0];
         if (first?.key) {
           setVideoKey(first.key);
         } else {
@@ -37,33 +37,33 @@ export default function Watch() {
   return (
     <div className="video-container">
       <button
-        onClick={(e) => {
-          e.stopPropagation();
-          navigate("/");
-        }}
-        className="backButton"
+        className="back-btn"
+        onClick={() => navigate("/")}
         aria-label="Go back"
       >
-        <img src={caretLeft} alt="" className="back-arrow" />
+        <img src={caretLeft} alt="" />
       </button>
 
       {loading && (
-        <Spinner animation="border" role="status" className="spinner">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <div className="video-spinner">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading trailer…</span>
+          </Spinner>
+        </div>
       )}
 
       {error && !loading && (
         <div className="video-error">
           <p>{error}</p>
-          <button onClick={() => navigate("/")} className="backButton backButton--visible">
-            Go back
+          <button className="btn-info" onClick={() => navigate("/")}>
+            ← Go back
           </button>
         </div>
       )}
 
       {videoKey && !loading && (
         <iframe
+          className="video-iframe"
           src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=1&playsinline=1`}
           title="Movie trailer"
           frameBorder="0"
