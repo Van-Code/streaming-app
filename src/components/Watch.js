@@ -3,7 +3,7 @@ import { options } from "../api.js";
 import Spinner from "react-bootstrap/Spinner";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Watch.css";
-import caretLeft from "../caret-left.svg";
+import caretLeft from "../assets/icons/caret-left.svg";
 
 export default function Watch() {
   const { id } = useParams();

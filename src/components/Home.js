@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import List from "./List";
+import Item from "./Item";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import { options } from "../api.js";
@@ -112,7 +112,9 @@ export default function Home() {
       <section className="browse">
         <h2 className="browse__heading">Popular Movies</h2>
         <Row xs={2} sm={3} md={4} lg={5} className="g-3">
-          <List movies={movies} />
+          {movies.map((movie) => (
+            <Item key={movie.id} movie={movie} />
+          ))}
         </Row>
       </section>
     </>
