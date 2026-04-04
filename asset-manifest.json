@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.733eefc3.css",
+    "main.js": "/static/js/main.83d05dfc.js",
+    "index.html": "/index.html",
+    "static/media/caret-left.svg": "/static/media/caret-left.9cc65060a198cf58a96b428419d4cbb9.svg",
+    "main.733eefc3.css.map": "/static/css/main.733eefc3.css.map",
+    "main.83d05dfc.js.map": "/static/js/main.83d05dfc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.733eefc3.css",
+    "static/js/main.83d05dfc.js"
+  ]
+}
