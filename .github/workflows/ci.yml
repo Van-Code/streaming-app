@@ -27,9 +27,10 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # A valid token is needed to build. Add REACT_APP_TMDB_TOKEN
-          # as a repository secret in Settings → Secrets and variables → Actions.
+          # Add REACT_APP_TMDB_TOKEN as a repository secret in
+          # Settings → Secrets and variables → Actions.
           REACT_APP_TMDB_TOKEN: ${{ secrets.REACT_APP_TMDB_TOKEN }}
+          INLINE_RUNTIME_CHUNK: false
 
       - name: Test
         run: npm test -- --watchAll=false --passWithNoTests
