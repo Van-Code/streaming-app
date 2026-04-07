@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 const root = createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/streaming-app">
       <App />
     </Router>
   </React.StrictMode>,
