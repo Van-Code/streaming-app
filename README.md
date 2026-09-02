@@ -23,16 +23,16 @@ Built as a portfolio project to demonstrate component architecture, client-side 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| UI framework | React 18 |
-| Routing | React Router 6 |
-| Component library | React-Bootstrap 2 + Bootstrap 5 |
-| Styling | CSS custom properties, component-scoped CSS |
-| Typography | Inter (Google Fonts) |
-| Data | TMDB API (The Movie Database) |
-| Bundler | Create React App (react-scripts 5) |
-| Deployment | GitHub Pages via GitHub Actions |
+| Layer             | Technology                                  |
+| ----------------- | ------------------------------------------- |
+| UI framework      | React 18                                    |
+| Routing           | React Router 6                              |
+| Component library | React-Bootstrap 2 + Bootstrap 5             |
+| Styling           | CSS custom properties, component-scoped CSS |
+| Typography        | Inter (Google Fonts)                        |
+| Data              | TMDB API (The Movie Database)               |
+| Bundler           | Create React App (react-scripts 5)          |
+| Deployment        | GitHub Pages via GitHub Actions             |
 
 ---
 
@@ -77,12 +77,12 @@ Open [http://localhost:3000](http://localhost:3000). The app will reload on file
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `npm start` | Start development server at localhost:3000 |
-| `npm run build` | Create optimized production build in `build/` |
-| `npm test` | Run tests (watch mode) |
-| `npm run deploy` | Build and push to `gh-pages` branch manually |
+| Command          | Description                                   |
+| ---------------- | --------------------------------------------- |
+| `npm start`      | Start development server at localhost:3000    |
+| `npm run build`  | Create optimized production build in `build/` |
+| `npm test`       | Run tests (watch mode)                        |
+| `npm run deploy` | Build and push to `gh-pages` branch manually  |
 
 ---
 
@@ -138,12 +138,14 @@ The modal pattern works by passing `previousLocation` in router state. When `/mo
 <Routes location={previousLocation || location}>
   <Route path="/" element={user ? <Home /> : <SelectProfile />} />
   <Route path="/watch/:id" element={<Watch />} />
-</Routes>
-{previousLocation && (
-  <Routes>
-    <Route path="/modal" element={<Details movie={movie} />} />
-  </Routes>
-)}
+</Routes>;
+{
+  previousLocation && (
+    <Routes>
+      <Route path="/modal" element={<Details movie={movie} />} />
+    </Routes>
+  );
+}
 ```
 
 ### State management
@@ -169,19 +171,19 @@ Profile selection persists the profile ID to `localStorage` but does not restore
 
 All movie data is fetched live from [TMDB](https://www.themoviedb.org/).
 
-| Endpoint | Used by | Purpose |
-|---|---|---|
-| `GET /movie/popular` | `Home.js` | Browse grid + hero (page 1, 20 results) |
+| Endpoint                | Used by    | Purpose                                    |
+| ----------------------- | ---------- | ------------------------------------------ |
+| `GET /movie/popular`    | `Home.js`  | Browse grid + hero (page 1, 20 results)    |
 | `GET /movie/:id/videos` | `Watch.js` | Fetch trailer key (prefers type "Trailer") |
 
 Images are served from `https://image.tmdb.org/t/p/`:
 
-| Size | Used for |
-|---|---|
-| `w1280` | Hero backdrop |
-| `w780` | Modal backdrop |
-| `w500` | Card poster |
-| `w342` | Modal poster |
+| Size    | Used for       |
+| ------- | -------------- |
+| `w1280` | Hero backdrop  |
+| `w780`  | Modal backdrop |
+| `w500`  | Card poster    |
+| `w342`  | Modal poster   |
 
 The app requires a valid TMDB bearer token set in `REACT_APP_TMDB_TOKEN`. Without it, all fetches will fail and the error state will be displayed.
 
@@ -204,24 +206,45 @@ The app requires a valid TMDB bearer token set in `REACT_APP_TMDB_TOKEN`. Withou
 
 ## Deployment
 
-### Automatic (GitHub Actions)
+### Automatic CI
 
-Push to `main` triggers `.github/workflows/deploy.yml`, which builds the app and pushes the `build/` folder to the `gh-pages` branch using `peaceiris/actions-gh-pages`.
+GitHub Actions runs on every push and pull request targeting main.
+
+The workflow:
+
+- Checks out the repository.
+- Sets up Node.js 20.
+- Installs dependencies with npm ci.
+- Builds the production app with npm run build.
+- Runs the test suite.
+- Uses the REACT_APP_TMDB_TOKEN repository variable during the build.
+
+The workflow is located at:
+
+.github/workflows/ci.yml
 
 **Required setup:**
-1. In your GitHub repo, go to **Settings → Secrets and variables → Actions**
-2. Add `REACT_APP_TMDB_TOKEN` with your TMDB bearer token
-3. Go to **Settings → Pages**, set source to **Deploy from branch**, branch `gh-pages`
 
-### Manual
+In your GitHub repository, go to **Settings → Secrets and variables → Actions**.
+Under Variables, add REACT_APP_TMDB_TOKEN with your TMDB bearer token.
+
+The CI workflow currently verifies that the application builds and tests successfully. It does not automatically deploy to GitHub Pages.
+
+### Manual Deployment
+
+To deploy the application to GitHub Pages:
 
 ```bash
 npm run deploy
 ```
 
-Runs the build and pushes to `gh-pages` using the local `gh-pages` CLI.
+The deployment process:
 
----
+Runs npm run build automatically through the predeploy script.
+Generates the production build in build/.
+Uses the gh-pages CLI to publish the build/ directory to the gh-pages branch.
+
+## GitHub Pages is configured to serve the gh-pages branch.
 
 ## Known Limitations
 
@@ -251,9 +274,9 @@ Runs the build and pushes to `gh-pages` using the local `gh-pages` CLI.
 
 > Screenshots taken from the live demo at [van-code.github.io/streaming-app](https://van-code.github.io/streaming-app)
 
-| Profile Selection | Browse / Hero | Detail Modal | Watch |
-|---|---|---|---|
-| ![Profile selection screen](./public/profile.png) | ![Browse screen with hero](./public/list.png) | *(see live demo)* | ![Watch screen](./public/watch.png) |
+| Profile Selection                                 | Browse / Hero                                 | Detail Modal      | Watch                               |
+| ------------------------------------------------- | --------------------------------------------- | ----------------- | ----------------------------------- |
+| ![Profile selection screen](./public/profile.png) | ![Browse screen with hero](./public/list.png) | _(see live demo)_ | ![Watch screen](./public/watch.png) |
 
 ---
 
