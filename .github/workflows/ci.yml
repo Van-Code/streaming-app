@@ -26,9 +26,9 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Add REACT_APP_TMDB_TOKEN as a repository secret in
+          # Add REACT_APP_TMDB_TOKEN as a repository variable in
           # Settings → Secrets and variables → Actions.
-          REACT_APP_TMDB_TOKEN: ${{ secrets.REACT_APP_TMDB_TOKEN }}
+          REACT_APP_TMDB_TOKEN: ${{ vars.REACT_APP_TMDB_TOKEN }}
           INLINE_RUNTIME_CHUNK: false
 
       - name: Test

@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/streaming-app/static/css/main.733eefc3.css",
+    "main.js": "/streaming-app/static/js/main.471ece2b.js",
+    "index.html": "/streaming-app/index.html",
+    "static/media/caret-left.svg": "/streaming-app/static/media/caret-left.9cc65060a198cf58a96b428419d4cbb9.svg",
+    "main.733eefc3.css.map": "/streaming-app/static/css/main.733eefc3.css.map",
+    "main.471ece2b.js.map": "/streaming-app/static/js/main.471ece2b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.733eefc3.css",
+    "static/js/main.471ece2b.js"
+  ]
+}
